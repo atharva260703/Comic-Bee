@@ -30,7 +30,7 @@ app.get("/comicbee",async(req,res)=>{
         });
     }
     catch(error) {
-        result.status(500).json({
+        res.status(500).json({
             message: "Database Connection failure",
             error: error.message
         });
