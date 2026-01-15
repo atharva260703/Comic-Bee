@@ -7,6 +7,10 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 5432,
+    ssl: false,
+    max : 15,
+    idleTimeoutMillis: 20000,
+    connectionTimeoutMillis: 10000,
 });
 
 pool.connect()
