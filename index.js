@@ -39,5 +39,5 @@ app.get("/comicbee",async(req,res)=>{
 
 app.listen(PORT, ()=>{
     console.log(`Comic Bee Server is running on port ${PORT}`);
-    console.log(`Visit https://localhost:${PORT}`);
+    console.log(`Visit http://localhost:${PORT}`);
 });
