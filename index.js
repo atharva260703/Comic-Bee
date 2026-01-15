@@ -1,37 +1,43 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
+const pool = require("./db");
 const comicRoutes = require("./routes/comics.routes.js");
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.get("/",(req,res)=>{
+    res.send(`
+        <h1>Welcome to Comic Bee</h1>
+        <p>Comic Bee API is running ONLINE </p>
+    `);
+});
 
 app.use("/comics",comicRoutes);
-app.get('/', (req, res) => {
-    res.send('<h1>Welcome to Comic Bee</h1>');
-    res.send("<p>Comic Bee API is running and gone up live </p>");
-});
-app.listen(PORT, () => {
-    console.log("Server is running on port " + PORT + "ONLINE with http://localhost:${PORT");
-})
-app.get('/comicbee-db', async (req, res) => {
+
+app.get("/comicbee",async(req,res)=>{
     try {
-        const result = await pool.query('SELECT NOW()');
+        const res = await pool.query("SELECT *FROM authors");
         res.json({
-            message: 'Database connected successfully',
-            timestamp: result.rows[0].now
+            message: "Database connected successfully",
+            timestamp: res.rows[0].now
         });
-    } catch (error) {
+    }
+    catch(error) {
         res.status(500).json({
-            message: 'Database connection failed',
+            message: "Database Connection failure",
             error: error.message
         });
     }
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Comic Bee server is running on port ${PORT}`);
-    console.log(`Visit http://localhost:${PORT} to get started`);
+app.listen(PORT, ()=>{
+    console.log("Comic Bee Server is running on port ${PORT}");
+    console.log("Visit https://localhost:${PORT}");
 });
