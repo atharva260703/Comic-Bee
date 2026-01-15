@@ -23,7 +23,7 @@ app.use("/comics",comicRoutes);
 
 app.get("/comicbee",async(req,res)=>{
     try {
-        const result = await pool.query("SELECT *FROM authors");
+        const result = await pool.query("SELECT NOW()");
         res.json({
             message: "Database connected successfully",
             timestamp: result.rows[0].now
@@ -38,6 +38,6 @@ app.get("/comicbee",async(req,res)=>{
 });
 
 app.listen(PORT, ()=>{
-    console.log('Comic Bee Server is running on port ${PORT}');
-    console.log('Visit https://localhost:${PORT}');
+    console.log(`Comic Bee Server is running on port ${PORT}`);
+    console.log(`Visit https://localhost:${PORT}`);
 });
