@@ -23,14 +23,14 @@ app.use("/comics",comicRoutes);
 
 app.get("/comicbee",async(req,res)=>{
     try {
-        const res = await pool.query("SELECT *FROM authors");
+        const result = await pool.query("SELECT *FROM authors");
         res.json({
             message: "Database connected successfully",
-            timestamp: res.rows[0].now
+            timestamp: result.rows[0].now
         });
     }
     catch(error) {
-        res.status(500).json({
+        result.status(500).json({
             message: "Database Connection failure",
             error: error.message
         });
