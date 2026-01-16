@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Comic Bee Design System - Dark theme with bee-inspired yellow accents */
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 45 100% 98%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 45 100% 98%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 45 100% 98%;
+
+    --primary: 45 100% 50%;
+    --primary-foreground: 220 15% 8%;
+
+    --secondary: 45 80% 60%;
+    --secondary-foreground: 220 15% 8%;
+
+    --muted: 220 10% 20%;
+    --muted-foreground: 45 20% 60%;
+
+    --accent: 45 100% 45%;
+    --accent-foreground: 220 15% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 45 100% 98%;
+
+    --border: 45 40% 25%;
+    --input: 220 15% 18%;
+    --ring: 45 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Comic Bee tokens */
+    --bee-yellow: 45 100% 50%;
+    --bee-gold: 42 95% 55%;
+    --bee-honey: 38 90% 60%;
+    --bee-dark: 220 15% 6%;
+    --bee-card: 220 15% 14%;
+    --bee-glow: 45 100% 50% / 0.3;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 100% 50%), hsl(38 90% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 14%), hsl(220 15% 10%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 15% 8%), hsl(220 15% 4%));
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 30px hsl(45 100% 50% / 0.2);
+    --shadow-button: 0 4px 15px hsl(45 100% 50% / 0.3);
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 45 100% 98%;
+    --sidebar-primary: 45 100% 50%;
+    --sidebar-primary-foreground: 220 15% 8%;
+    --sidebar-accent: 220 15% 18%;
+    --sidebar-accent-foreground: 45 100% 98%;
+    --sidebar-border: 45 40% 20%;
+    --sidebar-ring: 45 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  h1, h2, h3, .comic-title {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  .comic-card {
+    @apply relative overflow-hidden rounded-xl border-2 border-primary/30 bg-card p-6;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+  }
+
+  .comic-card:hover {
+    @apply border-primary/60;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .comic-card-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .comic-card-disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .bee-button {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-bold text-primary-foreground transition-all;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-button);
+  }
+
+  .bee-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px hsl(45 100% 50% / 0.4);
+  }
+
+  .bee-button:active {
+    transform: translateY(0);
+  }
+
+  .bee-button-outline {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-bold border-2 border-primary text-primary bg-transparent transition-all;
+  }
+
+  .bee-button-outline:hover {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .bee-input {
+    @apply w-full rounded-lg border-2 border-border bg-input px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all;
+  }
+
+  .halftone-pattern {
+    background-image: radial-gradient(circle, hsl(45 100% 50% / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .comic-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .page-container {
+    @apply min-h-screen px-4 py-8;
+    background: var(--gradient-hero);
+  }
+
+  .coming-soon-badge {
+    @apply absolute top-3 right-3 px-3 py-1 text-xs font-bold rounded-full bg-muted text-muted-foreground;
+  }
+
+  .chapter-badge {
+    @apply inline-flex items-center px-3 py-1 text-sm font-bold rounded-full bg-primary/20 text-primary;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(45 100% 50% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(45 100% 50% / 0.5); }
+  }
+}
