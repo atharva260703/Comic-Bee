@@ -1,27 +1,246 @@
-<!doctype html>
-<html lang="en">
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap");
 
-  <title>Comic Bee</title>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  <meta name="description" content="Comic Bee – Learning through stories" />
-  <meta name="author" content="Comic Bee" />
+/* =====================================================
+   🐝 COMIC BEE – ABSOLUTELY GORGEOUS EDUCATION THEME
+   Joyful • Rewarding • Addictive • Premium
+   ===================================================== */
 
-  <meta property="og:title" content="Comic Bee" />
-  <meta property="og:description" content="Learning through stories" />
-  <meta property="og:type" content="website" />
+@layer base {
+  :root {
+    /* 🌈 BACKGROUND (bright, happy, warm) */
+    --background: 38 100% 97%;
+    --foreground: 25 45% 20%;
 
+    --card: 0 0% 100%;
+    --card-foreground: 25 45% 20%;
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@comicbee" />
+    /* 🟤 STRUCTURE */
+    --primary: 20 20% 40%;          /* rich brown */
+    --primary-foreground: 45 100% 96%;
 
-  <link rel="icon" href="/favicon.ico" />
-</head>
+    /* 🟡 MAGIC GOLD */
+    --accent: 45 100% 60%;
+    --accent-foreground: 25 45% 20%;
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    --muted: 38 40% 92%;
+    --muted-foreground: 25 30% 35%;
+
+    --border: 38 35% 85%;
+    --ring: 45 100% 60%;
+
+    --radius: 1.25rem;
+
+    /* 🌟 BRAND MAGIC */
+    --gold: 45 100% 60%;
+    --honey: 38 95% 65%;
+    --chocolate: 20 20% 40%;
+
+    /* 🌈 GRADIENTS */
+    --gradient-hero: radial-gradient(
+        circle at top,
+        hsl(45 100% 85% / 0.8),
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        hsl(38 100% 97%),
+        hsl(35 90% 94%)
+      );
+
+    --gradient-card: linear-gradient(
+      145deg,
+      hsl(0 0% 100%),
+      hsl(38 60% 97%)
+    );
+
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(45 100% 60%),
+      hsl(38 95% 65%)
+    );
+
+    --gradient-button: linear-gradient(
+      135deg,
+      hsl(20 20% 40%),
+      hsl(20 25% 55%)
+    );
+
+    /* 🌫 SHADOWS (soft & joyful) */
+    --shadow-soft: 0 12px 30px hsl(30 40% 20% / 0.08);
+    --shadow-float: 0 20px 45px hsl(30 40% 20% / 0.15);
+    --shadow-glow: 0 0 35px hsl(45 100% 60% / 0.6);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Nunito", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  .comic-title {
+    font-family: "Bangers", cursive;
+    letter-spacing: 0.08em;
+    color: hsl(var(--chocolate));
+  }
+}
+
+/* =====================================================
+   🌟 LAYOUT MAGIC
+   ===================================================== */
+
+@layer components {
+  .page-container {
+    @apply min-h-screen px-4 py-12;
+    background: var(--gradient-hero);
+  }
+
+  /* ✨ HERO TEXT */
+  .comic-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+    text-shadow: 0 4px 15px hsl(45 100% 60% / 0.4);
+  }
+
+  /* 🧱 CLASS / SUBJECT CARDS */
+  .comic-card {
+    @apply relative rounded-3xl p-8 cursor-pointer;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .comic-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      hsl(45 100% 60% / 0.35),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .comic-card::after {
+    content: "✨";
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    font-size: 2rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s ease;
+  }
+
+  .comic-card:hover {
+    transform: translateY(-14px) scale(1.05) rotate(-0.5deg);
+    box-shadow: var(--shadow-float);
+  }
+
+  .comic-card:hover::before {
+    opacity: 1;
+  }
+
+  .comic-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* 🟡 CHAPTER / XP BADGES */
+  .chapter-badge {
+    @apply inline-flex items-center px-5 py-1 text-sm font-extrabold rounded-full;
+    background: var(--gradient-gold);
+    color: hsl(var(--foreground));
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* 🔘 BUTTONS (GAME FEEL) */
+  .bee-button {
+    @apply inline-flex items-center justify-center rounded-2xl px-10 py-5 font-black;
+    background: var(--gradient-button);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-soft);
+    transition: all 0.35s ease;
+  }
+
+  .bee-button:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .bee-button:active {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .bee-button-outline {
+    @apply inline-flex items-center justify-center rounded-2xl px-10 py-5 font-black border-2;
+    border-color: hsl(var(--chocolate));
+    color: hsl(var(--chocolate));
+    transition: all 0.3s ease;
+  }
+
+  .bee-button-outline:hover {
+    background: var(--gradient-gold);
+    color: hsl(var(--foreground));
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+/* =====================================================
+   🎮 MICRO-INTERACTIONS & FUN
+   ===================================================== */
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pop {
+    animation: pop 1.6s infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2.5s infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes pop {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px hsl(45 100% 60% / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 45px hsl(45 100% 60% / 0.7);
+    }
+  }
+}
