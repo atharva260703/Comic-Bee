@@ -1,32 +1,11 @@
 {
-  "name": "comic_bee",
-  "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/atharva260703/Comic-Bee#readme",
-  "bugs": {
-    "url": "https://github.com/atharva260703/Comic-Bee/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/atharva260703/Comic-Bee.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.6.1",
-    "express": "^4.22.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.16.3"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  }
+  "name": "rust-core",
+  "version": "0.1.0",
+  "files": [
+    "rust_core_bg.wasm",
+    "rust_core.js",
+    "rust_core.d.ts"
+  ],
+  "main": "rust_core.js",
+  "types": "rust_core.d.ts"
 }
