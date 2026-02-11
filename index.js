@@ -9,10 +9,11 @@ import comicRoutes from "./routes/comics.routes.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use("/comics", comicRoutes);
 app.get("/comicbee", async (req, res) => {
@@ -29,10 +30,7 @@ app.get("/comicbee", async (req, res) => {
     });
   }
 });
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const frontendPath = path.join(
+const frontendPath = path.resolve(
   __dirname,
   "../Comic-Bee-frontend/Comic-Bee-frontend/dist"
 );
