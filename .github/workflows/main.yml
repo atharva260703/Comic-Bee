@@ -13,43 +13,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout Repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup Node
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # ==========================
-      # 🔹 Backend Build
-      # ==========================
+      # 🔹 Backend
       - name: Install Backend Dependencies
         run: |
           cd Comic_Bee
           npm install
 
-      # ==========================
-      # 🔹 Frontend Build
-      # ==========================
+      # 🔹 Frontend
       - name: Install Frontend Dependencies
         run: |
-          cd Comic-Bee-frontend/Comic-Bee-frontend
+          cd Comic-Bee-frontend
           npm install
 
       - name: Build Frontend
         run: |
-          cd Comic-Bee-frontend/Comic-Bee-frontend
+          cd Comic-Bee-frontend
           npm run build
 
-      # ==========================
-      # 🔹 Copy dist to backend
-      # ==========================
+      # 🔹 Copy build to backend
       - name: Copy Frontend Build to Backend
         run: |
-          cp -r Comic-Bee-frontend/Comic-Bee-frontend/dist Comic_Bee/public
+          cp -r Comic-Bee-frontend/dist Comic_Bee/public
 
       - name: CI Completed
         run: echo "Build Successful 🚀"
