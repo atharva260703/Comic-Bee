@@ -24,7 +24,6 @@ jobs:
       # 🔹 Backend
       - name: Install Backend Dependencies
         run: |
-          cd Comic_Bee
           npm install
 
       # 🔹 Frontend
