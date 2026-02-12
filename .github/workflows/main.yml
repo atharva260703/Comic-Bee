@@ -1,0 +1,46 @@
+name: Comic Bee CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 🔹 Backend
+      - name: Install Backend Dependencies
+        run: |
+          npm install
+
+      # 🔹 Frontend
+      - name: Install Frontend Dependencies
+        run: |
+          cd Comic-Bee-frontend
+          npm install
+
+      - name: Build Frontend
+        run: |
+          cd Comic-Bee-frontend
+          npm run build
+
+      # 🔹 Copy build to backend
+      - name: Copy Frontend Build to Backend
+        run: |
+          cp -r Comic-Bee-frontend/dist Comic_Bee/public
+
+      - name: CI Completed
+        run: echo "Build Successful 🚀"
