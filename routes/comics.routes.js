@@ -1,10 +1,6 @@
 import express from "express";
+import comicsController from "../controllers/comics.controller.js";
 const router = express.Router();
-
-const comicsController = require("../controllers/comics.controller");
-
 router.get("/", comicsController.getAllComics);
 router.post("/", comicsController.createComic);
-
-module.exports = router;
 export default router;
