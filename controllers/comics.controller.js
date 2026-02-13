@@ -1,7 +1,6 @@
-const pool = require("../db");
+import pool from "../db.js";
 
-
-exports.getAllComics = async (req, res) => {
+const getAllComics = async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM comics");
         res.status(200).json(result.rows);
@@ -13,7 +12,7 @@ exports.getAllComics = async (req, res) => {
     }
 };
 
-exports.createComic = async (req, res) => {
+const createComic = async (req, res) => {
     const { title, author } = req.body;
 
     try {
@@ -29,4 +28,9 @@ exports.createComic = async (req, res) => {
             error: err.message
         });
     }
+};
+
+export default {
+    getAllComics,
+    createComic
 };
