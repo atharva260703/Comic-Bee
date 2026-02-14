@@ -51,7 +51,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0",() => {
   console.log(`Comic Bee Server running on port ${PORT}`);
   console.log(`App available at http://localhost:${PORT}`);
 });
