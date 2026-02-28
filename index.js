@@ -13,8 +13,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Fix for __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -27,8 +25,6 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Routes
 app.use("/comics", comicRoutes);
 
 app.get("/comicbee", async (req, res) => {
@@ -45,8 +41,6 @@ app.get("/comicbee", async (req, res) => {
     });
   }
 });
-
-// Frontend build path
 const frontendPath = path.resolve(
   __dirname,
   "../Comic-Bee-frontend/Comic-Bee-frontend/dist"
@@ -62,6 +56,6 @@ const httpsOptions = {
   cert: fs.readFileSync("./comicbee.local.pem"),
 };
 https.createServer(httpsOptions, app).listen(PORT, "0.0.0.0", () => {
-  console.log(`🔒 Comic Bee Server running securely on port ${PORT}`);
+  console.log(`Comic Bee Server running securely on port ${PORT}`);
   console.log(`App available at https://comicbee.local:${PORT}`);
 });
