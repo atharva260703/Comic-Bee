@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import https from "https";
+import fs from "fs";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -16,7 +18,12 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://comicbee.local:3000",
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -50,8 +57,11 @@ app.use(express.static(frontendPath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-
-app.listen(PORT, "0.0.0.0",() => {
-  console.log(`Comic Bee Server running on port ${PORT}`);
-  console.log(`App available at http://localhost:${PORT}`);
+const httpsOptions = {
+  key: fs.readFileSync("./comicbee.local-key.pem"),
+  cert: fs.readFileSync("./comicbee.local.pem"),
+};
+https.createServer(httpsOptions, app).listen(PORT, "0.0.0.0", () => {
+  console.log(`🔒 Comic Bee Server running securely on port ${PORT}`);
+  console.log(`App available at https://comicbee.local:${PORT}`);
 });
