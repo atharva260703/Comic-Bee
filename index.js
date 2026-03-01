@@ -7,9 +7,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import pool from "./db.js";
-import authController from "./controllers/authController.js";
 import comicRoutes from "./routes/comics.routes.js";
-import authRoutes from "./routes/auth.js";
+import authRoutes from "./controllers/authController.js";
 dotenv.config();
 
 const app = express();
