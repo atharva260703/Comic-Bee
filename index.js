@@ -8,14 +8,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import pool from "./db.js";
 import comicRoutes from "./routes/comics.routes.js";
-
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 app.use(
   cors({
     origin: "https://comicbee.local:3000",
@@ -26,7 +24,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/comics", comicRoutes);
-
 app.get("/comicbee", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");

@@ -1,5 +1,4 @@
 import express from "express";
-import express from "express";
 import signup from "../controllers/authController";
 import verifyOTP from "../controllers/authController";
 router.post("/signup",signup);
