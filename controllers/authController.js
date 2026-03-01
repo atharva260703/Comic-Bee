@@ -1,4 +1,4 @@
-import pool from "../db";
+import pool from "../db.js";
 import bcrypt from "bcrypt";
 import jvt from "jsonwebtoken";
 import nodemailer from "nodemailer";
