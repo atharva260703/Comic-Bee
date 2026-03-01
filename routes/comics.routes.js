@@ -1,10 +1,12 @@
 import express from "express";
-import signup from "../controllers/authController";
-import verifyOTP from "../controllers/authController";
+import authRoutes from "../controllers/authController.js";
+import signup from "../controllers/authController.js";
+import verifyOTP from "../controllers/authController.js";
 router.post("/signup",signup);
 router.post("verify-otp",verifyOTP);
 import comicsController from "../controllers/comics.controller.js";
 const router = express.Router();
+router.use("/auth", authRoutes);
 router.post("/", comicsController.getAllComics);
 router.post("/", comicsController.createComic);
 export default router;

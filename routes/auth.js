@@ -76,4 +76,4 @@ router.post("/verify-otp", async (req, res) => {
   res.json({ message: "Account verified successfully" });
 });
 
-module.exports = router;
+export default router;
