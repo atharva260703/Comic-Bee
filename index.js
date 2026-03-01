@@ -8,7 +8,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import pool from "./db.js";
 import comicRoutes from "./routes/comics.routes.js";
-import authRoutes from "./controllers/authController.js";
 dotenv.config();
 
 const app = express();
@@ -25,7 +24,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/comics", comicRoutes);
-app.use("/api/auth",authRoutes);
 app.get("/comicbee", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");
