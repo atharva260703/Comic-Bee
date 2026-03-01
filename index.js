@@ -54,5 +54,5 @@ const httpsOptions = {
 };
 https.createServer(httpsOptions, app).listen(PORT, "0.0.0.0", () => {
   console.log(`Comic Bee Server running securely on port ${PORT}`);
-  console.log(`App available at https://comicbee.local:${PORT}`);
+  console.log(`Server started at https://comicbee.local:${PORT}`);
 });
